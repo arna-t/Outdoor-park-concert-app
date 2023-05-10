@@ -58,14 +58,22 @@ def printSeating(seating):
 
 def buyTickets(seating):
     n_tix = int(input("Number of seats to buy: "))
-    #seat_start = input("Starting seat (ex. 3d): ")
+    seat_start = input("Starting seat (ex. 3d): ")
+    user_r = int(seat_start[0:1])
+    user_c = ord(seat_start[1:2])-ord('a')
    # seat_selected = int(input("Select seat: "))
-    user_r = int(input("Enter a row n: "))
-    user_c = input("Enter a column letter: ")
-    user_c1 = ord(user_c) - ord('a')
-    print(user_r)
-    print(user_c1)
-    seating[user_r-1][user_c1] ='X'
+   # user_r = int(input("Enter a row n: "))
+   # user_c = input("Enter a column letter: ")
+    #user_c1 = ord(user_c) - ord('a')
+    #seat_selected = str(user_r) + user_c
+    print(f"{n_tix} seats starting at {seat_start} are available for purchase.")
+    #print(user_r)
+    #print(user_c1)
+    #seating[user_r-1][user_c1] ='X'
+    end_c = user_c + n_tix - 1
+    for c in range (user_c, end_c+1):
+        seating[user_r-1][c] = 'X'
+
    # print(f"{n_tix} seats starting at {seat_selected} are available for purchase.")
     name = input("Enter your name: ")
     email = input("Enter your email address: ")
