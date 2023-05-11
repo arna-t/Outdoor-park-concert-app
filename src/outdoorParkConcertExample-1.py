@@ -3,18 +3,19 @@ This example code creates a 2d list (2d matrix) that can store seating.
 The matrix is populated with . since all seats are available
 """
 
-n_row = 4
+n_row = 12
 n_col = 10
 mask_fee = 5
 tax_rate = 0.0725
 
-for i in range (n_row):
+""" for i in range (n_row):
     if i in range(0,5):
+        seat_type = 'front'
         price = 80
     elif i in range(5,11):
         price = 50
     else:
-        price = 25
+        price = 25 """
 
 # create some available seating
 
@@ -72,10 +73,23 @@ def printSeating(seating):
 
 
 def buyTickets(seating):
+    print("Ticket rates: front rows(1-4) = $80, middle rows(5-10) = $50, back rows(11-19) = $25")
     n_tix = int(input("Number of seats to buy: "))
     seat_start = input("Starting seat (ex. 3d): ")
     user_r = int(seat_start[0:1])
     user_c = ord(seat_start[1:2])-ord('a')
+
+    if user_r in range(0,5):
+        seat_type = 'front'
+        price = 80
+    elif user_r in range (5,11):
+        seat_type = 'middle'
+        price = 50
+    else:
+        seat_type = 'back'
+        price = 25
+
+
    # seat_selected = int(input("Select seat: "))
    # user_r = int(input("Enter a row n: "))
    # user_c = input("Enter a column letter: ")
@@ -105,6 +119,7 @@ def buyTickets(seating):
     print(f"Email: {email}")
     print(f"Number of tickets: {n_tix}")
     #print("Seats: {seat_start}")
+    print(f"Seat type: {seat_type}")
     print(f"Ticket Cost: ${cost}")
     print(f"Mask fee: ${mask_cost} ")
     print(f"Subtotal: ${sub_total}")
