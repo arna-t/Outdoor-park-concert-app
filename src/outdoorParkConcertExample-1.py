@@ -2,9 +2,19 @@
 This example code creates a 2d list (2d matrix) that can store seating.
 The matrix is populated with . since all seats are available
 """
+
 n_row = 4
 n_col = 10
+mask_fee = 5
+tax_rate = 0.0725
 
+for i in range (n_row):
+    if i in range(0,5):
+        price = 80
+    elif i in range(5,11):
+        price = 50
+    else:
+        price = 25
 
 # create some available seating
 
@@ -48,8 +58,13 @@ def printSeating(seating):
     for r in range(n_row):
         print(r+1, end = "\t")
         for c in range(n_col):
-            print(seating[r][c], end="    ")
-        print()  
+            print(seating[r][c], end="    ") # 5 spaces in between columns
+        print()              # every row (1,2,3,4) starts from the next line. Removing this function
+                            # makes all in one row
+      #  if r < 2:
+           # print("front")
+        #else:
+         #   print("middle")
 
 
 #def printReceipt(name, email):
@@ -81,17 +96,17 @@ def buyTickets(seating):
     print("            Receipt                 ")
     print("------------------------------------")
    # def calculateCost(n_tix):
-    cost = n_tix * 20
-    mask_fee = n_tix * 5
-    sub_total = cost + mask_fee
-    tax = float(sub_total) * 0.0725
+    cost = n_tix * price
+    mask_cost = n_tix * mask_fee
+    sub_total = cost + mask_cost
+    tax = float(sub_total) * tax_rate
     total = float(sub_total) + float(tax)
     print(f"Name:  {name}")
     print(f"Email: {email}")
     print(f"Number of tickets: {n_tix}")
     #print("Seats: {seat_start}")
     print(f"Ticket Cost: ${cost}")
-    print(f"Mask fee: ${mask_fee} ")
+    print(f"Mask fee: ${mask_cost} ")
     print(f"Subtotal: ${sub_total}")
     print("Tax: $", round(tax, 2))
     print("--------------------------------------")
@@ -100,7 +115,7 @@ def buyTickets(seating):
 
 seating = createSeating()
 userQuit = False
-seating[3][5] = 'G'
+#seating[3][5] = 'G'
 
 while (not userQuit):
 
@@ -113,8 +128,7 @@ while (not userQuit):
     if firstChar == 'v':
      # call function printSeating()
         printSeating(seating)
-     # our test matrix has 4 rows and 10 columns    
-
+    
     elif firstChar == 'b':
         buyTickets(seating)
     elif firstChar == 'q':
