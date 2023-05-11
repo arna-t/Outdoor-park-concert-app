@@ -1,5 +1,5 @@
 """
-This example code creates a 2d list (2d matrix) that can store seating.
+This code creates a 2d list (2d matrix) that can store seating.
 The matrix is populated with . since all seats are available
 """
 
@@ -7,15 +7,6 @@ n_row = 12
 n_col = 10
 mask_fee = 5
 tax_rate = 0.0725
-
-""" for i in range (n_row):
-    if i in range(0,5):
-        seat_type = 'front'
-        price = 80
-    elif i in range(5,11):
-        price = 50
-    else:
-        price = 25 """
 
 # create some available seating
 
@@ -27,7 +18,7 @@ def menu():
     print("[v] view seating")
     print("[b] buy tickets")
     print("[s] search for a customer name and display the tickets purchased")
-    print("[d] display all the pirchase made and total amount of income")
+    print("[d] display all the purchase made and total amount of income")
     print("[q] to quit")
     print()
 
@@ -44,15 +35,16 @@ def createSeating():
     return seating
 
 def printSeating(seating):
-    print("-----------------------------------------------------------")
-    print("                        Seating                            ")
-    print("-----------------------------------------------------------")
+    print("-------------------------------------------------------------------------")
+    print("                             Seating                                     ")
+    print("-------------------------------------------------------------------------")
     #print("a b c d e f g h i j      type     price ")
    # print('        ', end='')
     print ("\t", end="")
     for i in range(0,10):
         print ("%s " % chr(ord('a')+i), end = "   ")
-    print("")
+    print("type     price")
+    print("-------------------------------------------------------------------------")
    
  
 # print available seating
@@ -60,6 +52,12 @@ def printSeating(seating):
         print(r+1, end = "\t")
         for c in range(n_col):
             print(seating[r][c], end="    ") # 5 spaces in between columns
+        if r in range(0,5):
+            print ("front     $80 ")
+        elif r in range (5,11):
+            print("middle    $50")
+        else:
+            print("back      $25")
         print()              # every row (1,2,3,4) starts from the next line. Removing this function
                             # makes all in one row
       #  if r < 2:
