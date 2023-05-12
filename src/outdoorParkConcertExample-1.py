@@ -2,6 +2,7 @@
 This code creates a 2d list (2d matrix) that can store seating.
 The matrix is populated with . since all seats are available
 """
+import json
 
 n_row = 12
 n_col = 10
@@ -38,8 +39,6 @@ def printSeating(seating):
     print("-------------------------------------------------------------------------")
     print("                             Seating                                     ")
     print("-------------------------------------------------------------------------")
-    #print("a b c d e f g h i j      type     price ")
-   # print('        ', end='')
     print ("\t", end="")
     for i in range(0,10):
         print ("%s " % chr(ord('a')+i), end = "   ")
@@ -71,7 +70,6 @@ def printSeating(seating):
 
 
 def buyTickets(seating):
-    print("Ticket rates: front rows(1-4) = $80, middle rows(5-10) = $50, back rows(11-19) = $25")
     n_tix = int(input("Number of seats to buy: "))
     seat_start = input("Starting seat (ex. 3d): ")
     user_r = int(seat_start[0:1])
@@ -87,16 +85,7 @@ def buyTickets(seating):
         seat_type = 'back'
         price = 25
 
-
-   # seat_selected = int(input("Select seat: "))
-   # user_r = int(input("Enter a row n: "))
-   # user_c = input("Enter a column letter: ")
-    #user_c1 = ord(user_c) - ord('a')
-    #seat_selected = str(user_r) + user_c
     print(f"{n_tix} seats starting at {seat_start} are available for purchase.")
-    #print(user_r)
-    #print(user_c1)
-    #seating[user_r-1][user_c1] ='X'
     end_c = user_c + n_tix - 1
     for c in range (user_c, end_c+1):
         seating[user_r-1][c] = 'X'
@@ -113,18 +102,41 @@ def buyTickets(seating):
     sub_total = cost + mask_cost
     tax = float(sub_total) * tax_rate
     total = float(sub_total) + float(tax)
-    print(f"Name:  {name}")
-    print(f"Email: {email}")
-    print(f"Number of tickets: {n_tix}")
+    print(f"Name               : {name}")
+    print(f"Email              : {email}")
+    print(f"Number of tickets  : {n_tix}")
     #print("Seats: {seat_start}")
-    print(f"Seat type: {seat_type}")
-    print(f"Ticket Cost: ${cost}")
-    print(f"Mask fee: ${mask_cost} ")
-    print(f"Subtotal: ${sub_total}")
-    print("Tax: $", round(tax, 2))
-    print("--------------------------------------")
-    print("Total: $", round(total, 2))
-    menu()
+    print(f"Seat type          : {seat_type}")
+    print(f"Ticket Cost        : ${cost}")
+    print(f"Mask fee           : ${mask_cost} ")
+    print(f"Sub-total          : ${sub_total}")
+    print(f"Tax                : ${round(tax, 2)}")
+    print("------------------------------------")
+    print(f"Total              : ${round(total, 2)}")
+    
+    #create a dictionary with customer data
+    customer_info = {}
+    customer_info['name'] = name
+    customer_info['email'] = email        
+    customer_info['number of tickets purchased'] = n_tix
+    customer_info['seat type'] = seat_type
+    customer_info['total'] = total
+    
+    #create a json file and dump dictionary content to the json file
+    with open(r'/Users/arna.togayeva/Documents/GitHub/Outdoor-park-concert-app/cust_data.json', 'a') as outfile:
+        json.dump(customer_info, outfile)
+
+    print()
+    ask = input("Do you want make a new purchase(y/n)? ")
+    if ask == 'y':
+            buyTickets(seating)
+            
+    else:
+        menu()
+
+
+def display_purchases(customer_info):
+    print(customer_info)
 
 seating = createSeating()
 userQuit = False
@@ -144,6 +156,8 @@ while (not userQuit):
     
     elif firstChar == 'b':
         buyTickets(seating)
+    elif firstChar == 'd':
+        display_purchases
     elif firstChar == 'q':
         userQuit = True
     else:
