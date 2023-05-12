@@ -1,11 +1,12 @@
+
 """
 This code creates a 2d list (2d matrix) that can store seating.
 The matrix is populated with . since all seats are available
 """
 import json
 
-n_row = 12
-n_col = 10
+n_row = 19
+n_col = 26
 mask_fee = 5
 tax_rate = 0.0725
 
@@ -36,37 +37,28 @@ def createSeating():
     return seating
 
 def printSeating(seating):
-    print("-------------------------------------------------------------------------")
-    print("                             Seating                                     ")
-    print("-------------------------------------------------------------------------")
+    print("-------------------------------------------------------------------------------------------------------")
+    print("                                         Seating                                                       ")
+    print("-------------------------------------------------------------------------------------------------------")
     print ("\t", end="")
-    for i in range(0,10):
-        print ("%s " % chr(ord('a')+i), end = "   ")
-    print("type     price")
-    print("-------------------------------------------------------------------------")
+    for i in range(0,26):
+        print ("%s " % chr(ord('a')+i), end = " ")
+    print(" type     price")
+    print("-------------------------------------------------------------------------------------------------------")
    
  
 # print available seating
     for r in range(n_row):
         print(r+1, end = "\t")
         for c in range(n_col):
-            print(seating[r][c], end="    ") # 5 spaces in between columns
+            print(seating[r][c], end="  ") # 5 spaces in between columns
         if r in range(0,5):
             print ("front     $80 ")
         elif r in range (5,11):
             print("middle    $50")
         else:
             print("back      $25")
-        print()              # every row (1,2,3,4) starts from the next line. Removing this function
-                            # makes all in one row
-      #  if r < 2:
-           # print("front")
-        #else:
-         #   print("middle")
-
-
-#def printReceipt(name, email):
-   
+        print()             
 
 
 def buyTickets(seating):
@@ -90,7 +82,6 @@ def buyTickets(seating):
     for c in range (user_c, end_c+1):
         seating[user_r-1][c] = 'X'
 
-   # print(f"{n_tix} seats starting at {seat_selected} are available for purchase.")
     name = input("Enter your name: ")
     email = input("Enter your email address: ")
     print("------------------------------------")
@@ -105,7 +96,6 @@ def buyTickets(seating):
     print(f"Name               : {name}")
     print(f"Email              : {email}")
     print(f"Number of tickets  : {n_tix}")
-    #print("Seats: {seat_start}")
     print(f"Seat type          : {seat_type}")
     print(f"Ticket Cost        : ${cost}")
     print(f"Mask fee           : ${mask_cost} ")
@@ -140,7 +130,6 @@ def display_purchases(customer_info):
 
 seating = createSeating()
 userQuit = False
-#seating[3][5] = 'G'
 
 while (not userQuit):
 
